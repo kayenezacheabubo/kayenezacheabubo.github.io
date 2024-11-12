@@ -11,14 +11,16 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
 
   <style>
     /* Custom CSS */
-    body, html {
+    body,
+    html {
       height: 100%;
       margin: 0;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Playfair Display', serif;
     }
 
     .navbar {
@@ -26,17 +28,54 @@
     }
 
     .hero {
-      background-image: url(images/Minecraft\ Sticker\ -\ Minecraft\ -\ Discover\ &\ Share\ GIFs.gif);
-      background-repeat: no-repeat;
-      background-size: auto;
-      background-position: center;
-      background-attachment: fixed;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: black;
+      color: white;
+      background: linear-gradient(120deg, #4d6657, #a16f55, #d0b7a4);
+      background-size: 300% 300%;
+      position: relative;
+      overflow: hidden;
+      animation: color 12s ease-in-out infinite;
+    }
+    @keyframes color{
+      0%{
+        background-position: 0 50%;
+      }
+      50%{
+        background-position: 100% 50%;
+      }
+      10%{
+        background-position: 0 50%;
+      }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      filter: blur(15px);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('path/to/grain-texture.png');
+      /* Replace with actual grain texture image */
+      opacity: 0.2;
+      z-index: -1;
     }
 
     .hero p {
@@ -49,38 +88,79 @@
       font-size: 1rem;
       padding: 10px 10px;
       background-color: transparent;
-      border: 2px solid black;
-      color: black;
+      border: 2px solid white;
+      color: white;
       transition: background-color 0.3s ease;
+      z-index: 1;
     }
 
     .btn-custom:hover {
-      background-color: red;
+      background-color: #667050;
       color: white;
     }
+
 
     /* Card Styling */
     .card {
       cursor: pointer;
-      height: 100%; /* Ensures the card takes full height */
+      height: 100%;
+      /* Ensures the card takes full height */
       display: flex;
       flex-direction: column;
     }
 
     .card img {
-      height: 300px; /* Fixed height for images to maintain uniformity */
-      object-fit: cover; /* Ensures the image fills the space without distortion */
+      height: 300px;
+      /* Fixed height for images to maintain uniformity */
+      object-fit: cover;
+      /* Ensures the image fills the space without distortion */
     }
 
     .card-body {
-      flex-grow: 1; /* Makes all card bodies equal height */
+      flex-grow: 1;
+      /* Makes all card bodies equal height */
     }
 
     /* Responsive Grid */
     @media (max-width: 768px) {
       .card img {
-        height: 300px; /* Adjust image height for smaller screens */
+        height: 300px;
+        /* Adjust image height for smaller screens */
       }
+    }
+
+    #profile {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: linear-gradient(to right top, #6f8a63, #6a7e5c, #647256, #5d6650, #565b4b);
+
+    }
+
+    /* Profile Section Styling */
+    .profile-image-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-me-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: black;
+      /* Adjust color to your preference */
+      color: white;
+      border-radius: 20px;
+      border: 4px solid #D00000;
     }
   </style>
 </head>
@@ -99,6 +179,9 @@
             <a class="nav-link active" href="#">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#profile">Profile</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#portfolio">Project</a>
           </li>
         </ul>
@@ -113,6 +196,27 @@
       <a href="#portfolio" class="btn btn-custom">Explore Now</a>
     </div>
   </div>
+
+  <!-- Profile Section -->
+  <section id="profile" class="text-center bg-light py-5">
+    <div class="container">
+      <h2 class="mb-3">Profile</h2>
+
+      <!-- Circular Image Container -->
+      <div class="profile-image-container mb-3">
+        <img src="images/6165712341715499746.jpg" alt="Profile Image" class="profile-image">
+      </div>
+
+      <p class="mb-4">Kayene Zache R. Abubo</p>
+
+      <!-- Rectangle Container for Additional Info -->
+      <div class="about-me-container p-4">
+        <h4>About Me</h4>
+        <p>3rd year DIT student from Polytechnic University of the Philippines Sto. Tomas Campus (PUP-STC) </p>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Portfolio Section -->
   <section id="portfolio" class="py-5">
@@ -194,7 +298,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
