@@ -1,156 +1,184 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Go-to</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-      /* Additional custom styling */
-      body {
-        font-family: Arial, sans-serif;
-        scroll-behavior: smooth;
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go-to</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Additional custom styling */
+    body {
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .beach-card img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    /* Fullscreen Home Section */
+    #home {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url(images/karlo-king-2b2Fx5lAxYY-unsplash.jpg);
+      background-position: center;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #about {
+      padding: 70px 0;
+    }
+
+    #home h2 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: transparent;
+      -webkit-text-stroke: 1px white;
+      text-stroke: 1px white;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+      #home h2 {
+        font-size: 2.5rem;
       }
-      section {
-        padding: 60px 0;
-      }
-      .navbar-brand {
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-      .beach-card img {
-        max-height: 200px;
-        object-fit: cover;
-      }
-      /* Fullscreen Home Section */
-      #home {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url(images/karlo-king-2b2Fx5lAxYY-unsplash.jpg);
-        background-position: center;
-        background-size: cover;
-      }
-      #about {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #beaches {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #architecture {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #products {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Ala Eh Travel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#beaches">Beaches</a></li>
-            <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-          </ul>
+    }
+
+    .justify-content {
+      text-align: justify;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Ala Eh Travel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#beaches">Beaches</a></li>
+          <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="text-center bg-light">
+    <div class="container">
+      <h2>Welcome to Batangas</h2>
+      <p>Explore the best beaches, breathtaking architecture, and local products of Batangas.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-dark text-white text-center">
+    <div class="container">
+      <h2>About Batangas</h2>
+      <p class="justify-content">Batangas (Tagalog: Lalawigan ng Batangas), (Spanish: Provincia de Batangas), is a
+        first-class province of the Philippines located on the southwestern part of Luzon in the CALABARZON region. Its
+        capital is Batangas City and it is bordered by the provinces of Cavite and Laguna to the north and Quezon to the
+        east. Across the Verde Island Passages to the south is the island of Mindoro and to the west lies the South
+        China Sea. Poetically, Batangas is often referred to by its ancient name, Kumintang.</p>
+      <p class="justify-content">Batangas is one of the most popular tourist destinations near Metro Manila. The
+        province has many beaches and is famous for excellent diving spots including Anilao in Mabini, Sombrero Island
+        in Tingloy, and Ligpo Island in Bauan, known collectively as Anilao. Other popular beaches include Matabungkay
+        in Lian, Punta Fuego in Nasugbu, and Laiya in San Juan.</p>
+      <p class="justify-content">Batangas is also home to Taal Volcano, one of the Decade Volcanoes, and the Taal
+        Heritage town, a small picturesque town with ancestral houses and structures dating back to the 19th century.
+      </p>
+      <p class="justify-content">Batangas hosts the second-largest international seaport in the Philippines after Metro
+        Manila. Designated as an industrial growth center, the city’s Central Business District (CBD) and nearby
+        industrial parks have seen a growth in business establishments as part of the CALABARZON program.</p>
+    </div>
+  </section>
+
+  <!-- Beaches Section -->
+  <section id="beaches" class="bg-light">
+    <div class="container">
+      <h2 class="text-center">Beaches</h2>
+      <div class="row text-center">
+        <!-- Beach 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card beach-card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 1">
+            <div class="card-body">
+              <h5 class="card-title">Beach 1</h5>
+              <p class="card-text">A beautiful beach with white sand and crystal-clear water.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Beach 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card beach-card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 2">
+            <div class="card-body">
+              <h5 class="card-title">Beach 2</h5>
+              <p class="card-text">Enjoy snorkeling and diving spots in this serene beach.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Beach 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card beach-card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 3">
+            <div class="card-body">
+              <h5 class="card-title">Beach 3</h5>
+              <p class="card-text">A family-friendly beach with soft sand and gentle waves.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <!-- Home Section -->
-    <section id="home" class="text-center bg-light">
-      <div class="container">
-        <h2>Welcome to Batangas</h2>
-        <p>Explore the best beaches, breathtaking architecture, and local products of Batangas.</p>
-      </div>
-    </section>
+  <!-- Architecture Section -->
+  <section id="architecture" class="bg-secondary text-white text-center">
+    <div class="container">
+      <h2>Architecture</h2>
+      <p>Batangas is home to beautiful historical architecture, including centuries-old churches and ancestral houses
+        that tell stories of its rich past.</p>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="bg-secondary text-white text-center">
-      <div class="container">
-        <h2>About Batangas</h2>
-        <p>Batangas is known for its stunning beaches, rich history, and vibrant culture. Located south of Manila, it’s a favorite getaway for both locals and tourists.</p>
-      </div>
-    </section>
+  <!-- Products Section -->
+  <section id="products" class="bg-light text-center">
+    <div class="container">
+      <h2>Local Products</h2>
+      <p>Discover local products from Batangas, including unique crafts, fresh produce, and handmade items that capture
+        the spirit of the region.</p>
+    </div>
+  </section>
 
-    <!-- Beaches Section -->
-    <section id="beaches" class="bg-light">
-      <div class="container">
-        <h2 class="text-center">Beaches</h2>
-        <div class="row text-center">
-          <!-- Beach 1 -->
-          <div class="col-md-4 mb-4">
-            <div class="card beach-card">
-              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 1">
-              <div class="card-body">
-                <h5 class="card-title">Beach 1</h5>
-                <p class="card-text">A beautiful beach with white sand and crystal-clear water.</p>
-              </div>
-            </div>
-          </div>
-          <!-- Beach 2 -->
-          <div class="col-md-4 mb-4">
-            <div class="card beach-card">
-              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 2">
-              <div class="card-body">
-                <h5 class="card-title">Beach 2</h5>
-                <p class="card-text">Enjoy snorkeling and diving spots in this serene beach.</p>
-              </div>
-            </div>
-          </div>
-          <!-- Beach 3 -->
-          <div class="col-md-4 mb-4">
-            <div class="card beach-card">
-              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Beach 3">
-              <div class="card-body">
-                <h5 class="card-title">Beach 3</h5>
-                <p class="card-text">A family-friendly beach with soft sand and gentle waves.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="bg-secondary text-white text-center">
-      <div class="container">
-        <h2>Architecture</h2>
-        <p>Batangas is home to beautiful historical architecture, including centuries-old churches and ancestral houses that tell stories of its rich past.</p>
-      </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="bg-light text-center">
-      <div class="container">
-        <h2>Local Products</h2>
-        <p>Discover local products from Batangas, including unique crafts, fresh produce, and handmade items that capture the spirit of the region.</p>
-      </div>
-    </section>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
 </html>
-
