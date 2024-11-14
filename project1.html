@@ -27,8 +27,11 @@
     }
 
     .beach-card img {
-      max-height: 200px;
+      width: 100%;
+      height: 200px;
       object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
     }
 
     /* Fullscreen Home Section */
@@ -45,10 +48,18 @@
     }
 
     #about {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      padding: 70px 0;
-      background-color: #FFB1B1;
       color: #000000;
+      background: linear-gradient(120deg, #9EDF9C, #62825D, #526E48, #31511E);
+      background-size: 300% 300%;
+      position: relative;
+      overflow: hidden;
+      animation: color 12s ease-in-out infinite;
+
+    
       
     }
 
@@ -81,6 +92,42 @@
         font-size: 1.5rem;
       }
     }
+    .beach-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .beach-card:hover {
+      transform: translateY(-5px);
+    }
+    .card-body {
+      background-image: linear-gradient(to bottom, #e9eed9, #e1e7cc, #dae0be, #d2d9b1, #cbd2a4);
+      padding: 40px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @keyframes color{
+      0%{
+        background-position: 0 50%;
+      }
+      50%{
+        background-position: 100% 50%;
+      }
+      10%{
+        background-position: 0 50%;
+      }
+    }
+    
   </style>
 </head>
 
@@ -205,13 +252,52 @@
   </section>
 
   <!-- Architecture Section -->
-  <section id="architecture" class="bg-secondary text-white text-center">
-    <div class="container">
-      <h2>Architecture</h2>
-      <p>Batangas is home to beautiful historical architecture, including centuries-old churches and ancestral houses
-        that tell stories of its rich past.</p>
+<section id="architecture" class="bg-secondary text-white">
+  <div class="container">
+    <h2 class="text-center">Architecture</h2>
+    <p class="text-center">Batangas is home to beautiful historical architecture, including centuries-old churches and ancestral houses that tell stories of its rich past.</p>
+    
+    <div class="row">
+      <!-- Architecture Card 1 -->
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card bg-dark text-white">
+          <img src="images/16353084716_3b3f5fb859_b.jpg" class="card-img" alt="Historical Church">
+          <div class="card-img-overlay d-flex align-items-end">
+            <div>
+              <h5 class="card-title">Padre Pio</h5>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Architecture Card 2 -->
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card bg-dark text-white">
+          <img src="images/caleruega.jpg" class="card-img" alt="Ancestral House">
+          <div class="card-img-overlay d-flex align-items-end">
+            <div>
+              <h5 class="card-title">Ancestral House</h5>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Architecture Card 3 -->
+      <div class="col-md-12 col-lg-4 mb-4">
+        <div class="card bg-dark text-white">
+          <img src="images/sansebastian.jpg" class="card-img" alt="Taal Heritage Town">
+          <div class="card-img-overlay d-flex align-items-end">
+            <div>
+              <h5 class="card-title">Taal Heritage Town</h5>
+              
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Products Section -->
   <section id="products" class="bg-light text-center">
