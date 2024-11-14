@@ -53,14 +53,11 @@
       justify-content: center;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       color: #000000;
-      background: linear-gradient(120deg, #9EDF9C, #62825D, #526E48, #31511E);
+      background: linear-gradient(120deg, #DE7C7D, #CC2B52, #AF1740);
       background-size: 300% 300%;
       position: relative;
       overflow: hidden;
       animation: color 12s ease-in-out infinite;
-
-    
-      
     }
 
     #home h2 {
@@ -92,6 +89,7 @@
         font-size: 1.5rem;
       }
     }
+
     .beach-card {
       border: none;
       border-radius: 15px;
@@ -99,9 +97,11 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s;
     }
+
     .beach-card:hover {
       transform: translateY(-5px);
     }
+
     .card-body {
       background-image: linear-gradient(to bottom, #e9eed9, #e1e7cc, #dae0be, #d2d9b1, #cbd2a4);
       padding: 40px;
@@ -116,24 +116,104 @@
       font-size: 0.9rem;
       color: #666;
     }
-    @keyframes color{
-      0%{
+
+    @keyframes color {
+      0% {
         background-position: 0 50%;
       }
-      50%{
+
+      50% {
         background-position: 100% 50%;
       }
-      10%{
+
+      100% {
         background-position: 0 50%;
       }
     }
-    
+
+    /* Navbar styling */
+    .navbar {
+      background: transparent;
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar .nav-link {
+      color: white;
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-link:hover {
+      color: #FFD700;
+      /* Gold color on hover */
+    }
+
+    /* Styling for Product Section */
+    #products {
+      padding: 60px 0;
+    }
+
+    #products .product-img {
+      max-height: 50px;
+      object-fit: cover;
+    }
+
+    /* Make carousel controls and indicators larger */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .carousel-indicators [data-bs-target] {
+      width: 1rem;
+      height: 1rem;
+      background-color: #333;
+    }
+
+    @media (max-width: 768px) {
+      #products h2 {
+        font-size: 1.75rem;
+      }
+
+      #products p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+      }
+
+      .product-img {
+        max-height: 50px;
+      }
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 400px;
+      /* Set a fixed height for the images */
+      object-fit: cover;
+      /* Ensures images cover the entire area without distortion */
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item img {
+        height: 300px;
+        /* Adjust height for smaller screens */
+      }
+    }
+
+    @media (max-width: 576px) {
+      .carousel-item img {
+        height: 200px;
+        /* Adjust height for extra small screens */
+      }
+    }
   </style>
 </head>
 
 <body>
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Ala Eh Travel</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -164,11 +244,11 @@
   <section id="about" class="text-center">
     <div class="container">
       <h2>About Batangas</h2>
-      <p class="justify-content">Batangas (Tagalog: Lalawigan ng Batangas), (Spanish: Provincia de Batangas), is a
-        first-class province of the Philippines located on the southwestern part of Luzon in the CALABARZON region. Its
-        capital is Batangas City and it is bordered by the provinces of Cavite and Laguna to the north and Quezon to the
-        east. Across the Verde Island Passages to the south is the island of Mindoro and to the west lies the South
-        China Sea. Poetically, Batangas is often referred to by its ancient name, Kumintang.</p>
+      <p class="justify-content">Batangas (Tagalog: Lalawigan ng Batangas), (Spanish: Provincia ```html
+        de Batangas), is a first-class province of the Philippines located on the southwestern part of Luzon in the
+        CALABARZON region. Its capital is Batangas City and it is bordered by the provinces of Cavite and Laguna to the
+        north and Quezon to the east. Across the Verde Island Passages to the south is the island of Mindoro and to the
+        west lies the South China Sea. Poetically, Batangas is often referred to by its ancient name, Kumintang.</p>
       <p class="justify-content">Batangas is one of the most popular tourist destinations near Metro Manila. The
         province has many beaches and is famous for excellent diving spots including Anilao in Mabini, Sombrero Island
         in Tingloy, and Ligpo Island in Bauan, known collectively as Anilao. Other popular beaches include Matabungkay
@@ -223,7 +303,8 @@
             <img src="images/115268569.jpg" class="card-img-top img-fluid" alt="Beach 4">
             <div class="card-body">
               <h5 class="card-title">Sepoc</h5>
-              <p class="card-text">Surrounded by the beautiful colors of nature that will surely make you feel like you’re in paradise.</p>
+              <p class="card-text">Surrounded by the beautiful colors of nature that will surely make you feel like
+                you’re in paradise.</p>
             </div>
           </div>
         </div>
@@ -238,9 +319,9 @@
           </div>
         </div>
         <!-- Beach 6 -->
-        <div class="col -md-4 mb-4">
+        <div class="col-md-4 mb-4">
           <div class="card beach-card">
-            <img src="images/Beachfront-1024x683.jpg" class="card-img-top img-fluid" alt="Beach 6">
+            <img src="images/Beachfront-1024x683.jpg" class="card-img-top img-fluid" alt="Beach  6">
             <div class="card-body">
               <h5 class="card-title">Laiya</h5>
               <p class="card-text">A long stretch of shoreline covered with fine white sand.</p>
@@ -252,52 +333,49 @@
   </section>
 
   <!-- Architecture Section -->
-<section id="architecture" class="bg-secondary text-white">
-  <div class="container">
-    <h2 class="text-center">Architecture</h2>
-    <p class="text-center">Batangas is home to beautiful historical architecture, including centuries-old churches and ancestral houses that tell stories of its rich past.</p>
-    
-    <div class="row">
-      <!-- Architecture Card 1 -->
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card bg-dark text-white">
-          <img src="images/16353084716_3b3f5fb859_b.jpg" class="card-img" alt="Historical Church">
-          <div class="card-img-overlay d-flex align-items-end">
-            <div>
-              <h5 class="card-title">Padre Pio</h5>
-            
+  <section id="architecture" class="bg-secondary text-white">
+    <div class="container">
+      <h2 class="text-center">Architecture</h2>
+      <p class="text-center">Batangas is home to beautiful historical architecture, including centuries-old churches and
+        ancestral houses that tell stories of its rich past.</p>
+
+      <div class="row">
+        <!-- Architecture Card 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="images/16353084716_3b3f5fb859_b.jpg" class="card-img" alt="Historical Church">
+            <div class="card-img-overlay d-flex align-items-end">
+              <div>
+                <h5 class="card-title">Padre Pio</h5>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Architecture Card 2 -->
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card bg-dark text-white">
-          <img src="images/caleruega.jpg" class="card-img" alt="Ancestral House">
-          <div class="card-img-overlay d-flex align-items-end">
-            <div>
-              <h5 class="card-title">Ancestral House</h5>
-              
+        <!-- Architecture Card 2 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="images/caleruega.jpg" class="card-img" alt="Ancestral House">
+            <div class="card-img-overlay d-flex align-items-end">
+              <div>
+                <h5 class="card-title">Caleruega</h5>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Architecture Card 3 -->
-      <div class="col-md-12 col-lg-4 mb-4">
-        <div class="card bg-dark text-white">
-          <img src="images/sansebastian.jpg" class="card-img" alt="Taal Heritage Town">
-          <div class="card-img-overlay d-flex align-items-end">
-            <div>
-              <h5 class="card-title">Taal Heritage Town</h5>
-              
+        <!-- Architecture Card 3 -->
+        <div class="col-md-12 col-lg-4 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="images/sansebastian.jpg" class="card-img" alt="Taal Heritage Town">
+            <div class="card-img-overlay d-flex align-items-end">
+              <div>
+                <h5 class="card-title">San Sebastian</h5>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Products Section -->
   <section id="products" class="bg-light text-center">
@@ -305,6 +383,50 @@
       <h2>Local Products</h2>
       <p>Discover local products from Batangas, including unique crafts, fresh produce, and handmade items that capture
         the spirit of the region.</p>
+
+      <!-- Carousel -->
+      <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/dream.jpg" class="d-block w-100" alt="Product 1">
+          </div>
+          <div class="carousel-item">
+            <img src="images/408462_469226539793386_336693097_n.jpg" class="d-block w-100" alt="Product 2">
+          </div>
+          <div class="carousel-item">
+            <img src="images/1634638945609_0N5A7047.jpg" class="d-block w-100" alt="Product 3">
+          </div>
+          <div class="carousel-item">
+            <img src="images/balisong.png" class="d-block w-100" alt="Product 4">
+          </div>
+          <div class="carousel-item">
+            <img src="images/panucha.png" class="d-block w-100" alt="Product 5">
+          </div>
+          <div class="carousel-item">
+            <img src="images/lit.png" class="d-block w-100" alt="Product 6">
+          </div>
+          <div class="carousel-item">
+            <img src="images/tsinelas.jpg" class="d-block w-100" alt="Product 7">
+          </div>
+          <div class="carousel-item">
+            <img src="images/sawali-large.jpg" class="d-block w-100" alt="Product 8">
+          </div>
+          <div class="carousel-item">
+            <img src="images/tablea.jpg" class="d-block w-100" alt="Product 9">
+          </div>
+          <div class="carousel-item">
+            <img src="images/burda-large.jpg" class="d-block w-100" alt="Product 10">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+          <span class="carousel -control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </section>
 
