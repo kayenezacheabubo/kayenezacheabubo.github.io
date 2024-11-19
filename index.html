@@ -11,6 +11,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
   <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 
@@ -20,34 +21,48 @@
     html {
       height: 100%;
       margin: 0;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     .navbar {
-      backdrop-filter: blur(30px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: transparent !important;
+      z-index: 10;
+      font-family: 'Playfair-Display', serif;
+
+
+
     }
 
     .hero {
+      font-family: 'Playfair-Display', serif;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: white;
-      background: linear-gradient(120deg, #4d6657, #a16f55, #d0b7a4);
+      background: linear-gradient(to top, #f0ece5, #eae1dd, #e3d7d6, #d8cdd2, #cbc5cd, #b8b5c0, #a5a5b2, #9096a5, #767b8f, #5d6178, #464863, #31304d);
       background-size: 300% 300%;
       position: relative;
       overflow: hidden;
       animation: color 12s ease-in-out infinite;
+      margin-top: 0;
     }
-    @keyframes color{
-      0%{
+
+    @keyframes color {
+      0% {
         background-position: 0 50%;
       }
-      50%{
+
+      50% {
         background-position: 100% 50%;
       }
-      10%{
+
+      10% {
         background-position: 0 50%;
       }
     }
@@ -88,14 +103,14 @@
       font-size: 1rem;
       padding: 10px 10px;
       background-color: transparent;
-      border: 2px solid white;
+      border: black;
       color: white;
       transition: background-color 0.3s ease;
       z-index: 1;
     }
 
     .btn-custom:hover {
-      background-color: #667050;
+      background-color: #31304D;
       color: white;
     }
 
@@ -130,20 +145,20 @@
     }
 
     #profile {
+      font-family:'Playfair-Display', serif; 
+      background-color: white;
+      color: black;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: linear-gradient(to right top, #6f8a63, #6a7e5c, #647256, #5d6650, #565b4b);
+
 
     }
 
     /* Profile Section Styling */
     .profile-image-container {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto;
-      border-radius: 50%;
+      height: 100%;
       overflow: hidden;
     }
 
@@ -153,21 +168,33 @@
       object-fit: cover;
     }
 
-    .about-me-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: black;
-      /* Adjust color to your preference */
+
+
+    .navbar-dark .navbar-nav .nav-link {
       color: white;
-      border-radius: 20px;
-      border: 4px solid #D00000;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+      color: #ccc;
+    }
+
+    .vr {
+      height: 100%;
+      width: 1px;
+      background-color: #ccc;
+      margin: 0 auto;
+    }
+
+    .object-fit-cover {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#">ZACHE</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -189,6 +216,7 @@
     </div>
   </nav>
 
+
   <!-- Hero Section -->
   <div class="hero">
     <div>
@@ -198,30 +226,31 @@
   </div>
 
   <!-- Profile Section -->
-  <section id="profile" class="text-center bg-light py-5">
-    <div class="container">
-      <h2 class="mb-3">Profile</h2>
+  <section id="profile" class="text-center py-5">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <!-- Left Section: About Me -->
+        <div class="col-md-6 text-start p-5">
+          <p class="fs-5">Kayene Zache R. Abubo</p>
+          <p class="fs-5">3rd year DIT student from Polytechnic University of the Philippines Sto. Tomas Campus
+            (PUP-STC)</p>
+        </div>
 
-      <!-- Circular Image Container -->
-      <div class="profile-image-container mb-3">
-        <img src="images/6165712341715499746.jpg" alt="Profile Image" class="profile-image">
-      </div>
-
-      <p class="mb-4">Kayene Zache R. Abubo</p>
-
-      <!-- Rectangle Container for Additional Info -->
-      <div class="about-me-container p-4">
-        <h4>About Me</h4>
-        <p>3rd year DIT student from Polytechnic University of the Philippines Sto. Tomas Campus (PUP-STC) </p>
+        <!-- Right Section: Full-Screen Image -->
+        <div class="col-md-6 p-0">
+          <div class="profile-image-container h-100">
+            <img src="images/6190529903997337740.jpg" alt="Profile Image" class="w-100 h-100 object-fit-cover">
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
 
+
   <!-- Portfolio Section -->
-  <section id="portfolio" class="py-5">
+  <section id="portfolio" class="py-5" style="margin-top: 100px;">
     <div class="container">
-      <h2 class="text-center mb-5">My Works</h2>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         <!-- Card 1 -->
         <div class="col">
