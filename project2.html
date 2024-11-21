@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tarot Cards</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
       body {
-        background-color: #f5f5f5;
+        background-image: linear-gradient(to top, #6a1e55, #611e4e, #581e48, #4f1e41, #461d3b, #3e1d38, #371d34, #301d30, #281d2d, #221d29, #1d1c23, #1a1a1d);
+        color: white;
       }
       .card-container {
         margin-top: 20px;
@@ -42,15 +44,20 @@
         background: #fff;
       }
       .card-back {
-        background: #222;
-        color: #fff;
+        font-family: 'Playfair-Display', serif;
+        background: white;
+        color: black;
         transform: rotateY(180deg);
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
         padding: 15px;
-        text-align: center;
-        font-size: 1rem;
+        text-align: justify;
+        font-size: 1.2rem;
+      }
+      .card-back h5 {
+        margin-top: 0;
       }
       .card-img {
         width: 100%;
@@ -67,27 +74,47 @@
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      <div class="row card-container" id="card-container"></div>
+
+      <!-- Tarot Cards Sections -->
+      <div id="wands-section" class="card-section">
+        <h2 class="text-center mt-4">Wands</h2>
+        <div class="row card-container" id="wands-container"></div>
+      </div>
+
+      <div id="cups-section" class="card-section">
+        <h2 class="text-center mt-4">Cups</h2>
+        <div class="row card-container" id="cups-container"></div>
+      </div>
+
+      <div id="pentacles-section" class="card-section">
+        <h2 class="text-center mt-4">Pentacles</h2>
+        <div class="row card-container" id="pentacles-container"></div>
+      </div>
+
+      <div id="swords-section" class="card-section">
+        <h2 class="text-center mt-4">Swords</h2>
+        <div class="row card-container" id="swords-container"></div>
+      </div>
     </div>
 
     <script>
       const tarotCardImages = {
-        "Page of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Wands11.jpg/104px-Wands11.jpg",
-        "Knight of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Wands12.jpg/104px-Wands12.jpg",
-        "Queen of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Wands13.jpg/105px-Wands13.jpg",
-        "King of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Wands14.jpg/103px-Wands14.jpg",
-        "Page of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Cups11.jpg/104px-Cups11.jpg",
-        "Knight of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Cups12.jpg/104px-Cups12.jpg",
-        "Queen of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Cups13.jpg/104px-Cups13.jpg",
-        "King of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Cups14.jpg/105px-Cups14.jpg",
-        "Page of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Pents11.jpg/104px-Pents11.jpg",
-        "Knight of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Pents12.jpg/104px-Pents12.jpg",
-        "Queen of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pents13.jpg/104px-Pents13.jpg",
-        "King of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pents14.jpg/104px-Pents14.jpg",
-        "Page of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Swords11.jpg/104px-Swords11.jpg",
-        "Knight of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Swords12.jpg/104px-Swords12.jpg",
-        "Queen of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Swords13.jpg/103px-Swords13.jpg",
-        "King of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Swords14.jpg/105px-Swords14.jpg"
+        "Page of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/32.jpg",
+        "Knight of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/33.jpg",
+        "Queen of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/34.jpg",
+        "King of Wands": "https://gfx.tarot.com/images/site/decks/rider/full_size/35.jpg",
+        "Page of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/46.jpg",
+        "Knight of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/47.jpg",
+        "Queen of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/48.jpg",
+        "King of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/49.jpg",
+        "Page of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/74.jpg",
+        "Knight of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/75.jpg",
+        "Queen of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/76.jpg",
+        "King of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/77.jpg",
+        "Page of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/60.jpg",
+        "Knight of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/61.jpg",
+        "Queen of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/62.jpg",
+        "King of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/63.jpg"
       };
 
       async function fetchTarotCards() {
@@ -105,14 +132,21 @@
       }
 
       function displayTarotCards(cards) {
-        const container = document.getElementById('card-container');
-        container.innerHTML = '';
+        const wandsContainer = document.getElementById('wands-container');
+        const cupsContainer = document.getElementById('cups-container');
+        const pentaclesContainer = document.getElementById('pentacles-container');
+        const swordsContainer = document.getElementById('swords-container');
+        
+        wandsContainer.innerHTML = '';
+        cupsContainer.innerHTML = '';
+        pentaclesContainer.innerHTML = '';
+        swordsContainer.innerHTML = '';
         document.getElementById('loading').style.display = 'none';
 
         cards.forEach(card => {
           const imageUrl = tarotCardImages[card.name] || "https://via.placeholder.com/200x300?text=No+Image";
           const cardElement = `
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
               <div class="tarot-card" onclick="this.classList.toggle('flipped')">
                 <div class="card-inner">
                   <div class="card-front">
@@ -125,7 +159,17 @@
                 </div>
               </div>
             </div>`;
-          container.innerHTML += cardElement;
+
+          // Assign the card to the correct section based on its suit
+          if (card.name.includes("Wands")) {
+            wandsContainer.innerHTML += cardElement;
+          } else if (card.name.includes("Cups")) {
+            cupsContainer.innerHTML += cardElement;
+          } else if (card.name.includes("Pentacles")) {
+            pentaclesContainer.innerHTML += cardElement;
+          } else if (card.name.includes("Swords")) {
+            swordsContainer.innerHTML += cardElement;
+          }
         });
       }
 
