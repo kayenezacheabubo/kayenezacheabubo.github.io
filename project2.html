@@ -3,11 +3,133 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project 2</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Tarot Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f5f5f5;
+      }
+      .card-container {
+        margin-top: 20px;
+      }
+      .tarot-card {
+        perspective: 1000px;
+        width: 2.75in;
+        height: 4.75in;
+        margin: auto;
+      }
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+      }
+      .tarot-card.flipped .card-inner {
+        transform: rotateY(180deg);
+      }
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .card-front {
+        background: #fff;
+      }
+      .card-back {
+        background: #222;
+        color: #fff;
+        transform: rotateY(180deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        text-align: center;
+        font-size: 1rem;
+      }
+      .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello, this is my project no.2</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <div class="container">
+      <h1 class="text-center mt-4">Tarot Cards</h1>
+      <div id="loading" class="text-center mt-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="row card-container" id="card-container"></div>
+    </div>
+
+    <script>
+      const tarotCardImages = {
+        "Page of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Wands11.jpg/104px-Wands11.jpg",
+        "Knight of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Wands12.jpg/104px-Wands12.jpg",
+        "Queen of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Wands13.jpg/105px-Wands13.jpg",
+        "King of Wands": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Wands14.jpg/103px-Wands14.jpg",
+        "Page of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Cups11.jpg/104px-Cups11.jpg",
+        "Knight of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Cups12.jpg/104px-Cups12.jpg",
+        "Queen of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Cups13.jpg/104px-Cups13.jpg",
+        "King of Cups": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Cups14.jpg/105px-Cups14.jpg",
+        "Page of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Pents11.jpg/104px-Pents11.jpg",
+        "Knight of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Pents12.jpg/104px-Pents12.jpg",
+        "Queen of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pents13.jpg/104px-Pents13.jpg",
+        "King of Pentacles": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pents14.jpg/104px-Pents14.jpg",
+        "Page of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Swords11.jpg/104px-Swords11.jpg",
+        "Knight of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Swords12.jpg/104px-Swords12.jpg",
+        "Queen of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Swords13.jpg/103px-Swords13.jpg",
+        "King of Swords": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Swords14.jpg/105px-Swords14.jpg"
+      };
+
+      async function fetchTarotCards() {
+        try {
+          const response = await fetch('https://tarotapi.dev/api/v1/cards/courts');
+          const data = await response.json();
+          displayTarotCards(data.cards);
+        } catch (error) {
+          document.getElementById('loading').innerHTML = `
+            <div class="alert alert-danger" role="alert">
+              Failed to load Tarot cards. Please try again later.
+            </div>`;
+          console.error("Error fetching Tarot API:", error);
+        }
+      }
+
+      function displayTarotCards(cards) {
+        const container = document.getElementById('card-container');
+        container.innerHTML = '';
+        document.getElementById('loading').style.display = 'none';
+
+        cards.forEach(card => {
+          const imageUrl = tarotCardImages[card.name] || "https://via.placeholder.com/200x300?text=No+Image";
+          const cardElement = `
+            <div class="col-md-4 mb-4">
+              <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                  <div class="card-front">
+                    <img src="${imageUrl}" class="card-img" alt="${card.name}">
+                  </div>
+                  <div class="card-back">
+                    <h5>${card.name}</h5>
+                    <p>${card.meaning_up}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          container.innerHTML += cardElement;
+        });
+      }
+
+      fetchTarotCards();
+    </script>
   </body>
 </html>
