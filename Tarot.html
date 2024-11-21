@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarot Cards</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: linear-gradient(to top, #6a1e55, #611e4e, #581e48, #4f1e41, #461d3b, #3e1d38, #371d34, #301d30, #281d2d, #221d29, #1d1c23, #1a1a1d);
+      color: white;
+    }
+
+    .card-container {
+      margin-top: 20px;
+    }
+
+    .tarot-card {
+      perspective: 1000px;
+      width: 2.75in;
+      height: 4.75in;
+      margin: auto;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .tarot-card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-front {
+      background: #fff;
+    }
+
+    .card-back {
+      font-family: 'Playfair-Display', serif;
+      background: white;
+      color: black;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 15px;
+      text-align: justify;
+      font-size: 1.2rem;
+    }
+
+    .card-back h5 {
+      margin-top: 0;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center mt-4">Rider Waite Deck</h1>
+    <div id="loading" class="text-center mt-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input 
+      type="text" 
+      id="search" 
+      class="form-control" 
+      placeholder="Search Tarot Card..." 
+      onkeyup="searchCard()"
+      autocomplete="off">
+    </div>
+
+
+    <!-- Tarot Cards Sections -->
+    <div id="wands-section" class="card-section">
+      <h2 class="text-center mt-4">Wands</h2>
+      <div class="row card-container" id="wands-container"></div>
+    </div>
+
+    <div id="cups-section" class="card-section">
+      <h2 class="text-center mt-4">Cups</h2>
+      <div class="row card-container" id="cups-container"></div>
+    </div>
+
+    <div id="pentacles-section" class="card-section">
+      <h2 class="text-center mt-4">Pentacles</h2>
+      <div class="row card-container" id="pentacles-container"></div>
+    </div>
+
+    <div id="swords-section" class="card-section">
+      <h2 class="text-center mt-4">Swords</h2>
+      <div class="row card-container" id="swords-container"></div>
+    </div>
+  </div>
+
+  <script>
+    const tarotCardImages = {
+      "Page of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/32.jpg",
+      "Knight of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/33.jpg",
+      "Queen of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/34.jpg",
+      "King of Wands": "https://gfx.tarot.com/images/site/decks/rider/full_size/35.jpg",
+      "Page of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/46.jpg",
+      "Knight of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/47.jpg",
+      "Queen of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/48.jpg",
+      "King of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/49.jpg",
+      "Page of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/74.jpg",
+      "Knight of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/75.jpg",
+      "Queen of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/76.jpg",
+      "King of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/77.jpg",
+      "Page of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/60.jpg",
+      "Knight of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/61.jpg",
+      "Queen of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/62.jpg",
+      "King of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/63.jpg"
+    };
+
+    async function fetchTarotCards() {
+      try {
+        const response = await fetch('https://tarotapi.dev/api/v1/cards/courts');
+        const data = await response.json();
+        displayTarotCards(data.cards);
+      } catch (error) {
+        document.getElementById('loading').innerHTML = `
+            <div class="alert alert-danger" role="alert">
+              Failed to load Tarot cards. Please try again later.
+            </div>`;
+        console.error("Error fetching Tarot API:", error);
+      }
+    }
+
+    function displayTarotCards(cards) {
+      const wandsContainer = document.getElementById('wands-container');
+      const cupsContainer = document.getElementById('cups-container');
+      const pentaclesContainer = document.getElementById('pentacles-container');
+      const swordsContainer = document.getElementById('swords-container');
+
+      wandsContainer.innerHTML = '';
+      cupsContainer.innerHTML = '';
+      pentaclesContainer.innerHTML = '';
+      swordsContainer.innerHTML = '';
+      document.getElementById('loading').style.display = 'none';
+
+      cards.forEach(card => {
+        const imageUrl = tarotCardImages[card.name] || "https://via.placeholder.com/200x300?text=No+Image";
+        const cardElement = `
+            <div class="col-md-3 mb-4">
+              <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                  <div class="card-front">
+                    <img src="${imageUrl}" class="card-img" alt="${card.name}">
+                  </div>
+                  <div class="card-back">
+                    <h5>${card.name}</h5>
+                    <p>${card.meaning_up}</p>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+
+        // Assign the card to the correct section based on its suit
+        if (card.name.includes("Wands")) {
+          wandsContainer.innerHTML += cardElement;
+        } else if (card.name.includes("Cups")) {
+          cupsContainer.innerHTML += cardElement;
+        } else if (card.name.includes("Pentacles")) {
+          pentaclesContainer.innerHTML += cardElement;
+        } else if (card.name.includes("Swords")) {
+          swordsContainer.innerHTML += cardElement;
+        }
+      });
+    }
+
+    function searchCard() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const filteredCards = allCards.filter(card => card.name.toLowerCase().includes(query));
+      displayTarotCards(filteredCards);
+    }
+    fetchTarotCards();
+  </script>
+</body>
+
+</html>
