@@ -4,9 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tarot Cards</title>
+  <title>Rider Waite Deck</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-image: linear-gradient(to top, #6a1e55, #611e4e, #581e48, #4f1e41, #461d3b, #3e1d38, #371d34, #301d30, #281d2d, #221d29, #1d1c23, #1a1a1d);
@@ -19,15 +18,15 @@
 
     .tarot-card {
       perspective: 1000px;
-      width: 2.75in;
-      height: 4.75in;
+      width: 100%;
+      max-width: 150px;
       margin: auto;
     }
 
     .card-inner {
       position: relative;
       width: 100%;
-      height: 100%;
+      height: 260px;
       transform-style: preserve-3d;
       transition: transform 0.6s;
     }
@@ -52,7 +51,6 @@
     }
 
     .card-back {
-      font-family: 'Playfair-Display', serif;
       background: white;
       color: black;
       transform: rotateY(180deg);
@@ -60,13 +58,14 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding: 15px;
+      padding: 10px;
       text-align: justify;
-      font-size: 1.2rem;
+      font-size: 0.9rem;
     }
 
     .card-back h5 {
       margin-top: 0;
+      font-size: 0.9rem;
     }
 
     .card-img {
@@ -92,33 +91,37 @@
       </div>
     </div>
 
+    <!-- Search Bar -->
     <div class="search-bar">
-      <input 
-      type="text" 
-      id="search" 
-      class="form-control" 
-      placeholder="Search Tarot Card..." 
-      onkeyup="searchCard()"
-      autocomplete="off">
+      <input type="text" id="search" class="form-control" placeholder="Search Tarot Card" onkeyup="searchCard()"
+        autocomplete="off">
     </div>
 
+    <!-- Major Arcana Section -->
+    <div id="major-section" class="card-section">
+      <h2 class="text-center">Major Arcana</h2>
+      <div class="row card-container" id="major-container"></div>
+    </div>
 
-    <!-- Tarot Cards Sections -->
+    <!-- Wands Section -->
     <div id="wands-section" class="card-section">
       <h2 class="text-center mt-4">Wands</h2>
       <div class="row card-container" id="wands-container"></div>
     </div>
 
+    <!-- Cups Section -->
     <div id="cups-section" class="card-section">
       <h2 class="text-center mt-4">Cups</h2>
       <div class="row card-container" id="cups-container"></div>
     </div>
 
+    <!-- Pentacles Section -->
     <div id="pentacles-section" class="card-section">
       <h2 class="text-center mt-4">Pentacles</h2>
       <div class="row card-container" id="pentacles-container"></div>
     </div>
 
+    <!-- Swords Section -->
     <div id="swords-section" class="card-section">
       <h2 class="text-center mt-4">Swords</h2>
       <div class="row card-container" id="swords-container"></div>
@@ -127,6 +130,27 @@
 
   <script>
     const tarotCardImages = {
+      "The Fool": "https://gfx.tarot.com/images/site/decks/rider/mid_size/0.jpg",
+      "The Magician": "https://gfx.tarot.com/images/site/decks/rider/mid_size/1.jpg",
+      "The High Priestess": "https://gfx.tarot.com/images/site/decks/rider/mid_size/2.jpg",
+      "The Empress": "https://gfx.tarot.com/images/site/decks/rider/mid_size/3.jpg",
+      "The Emperor": "https://gfx.tarot.com/images/site/decks/rider/mid_size/4.jpg",
+      "The Hierophant": "https://gfx.tarot.com/images/site/decks/rider/mid_size/5.jpg",
+      "The Chariot": "https://gfx.tarot.com/images/site/decks/rider/mid_size/7.jpg",
+      "The Hermit": "https://gfx.tarot.com/images/site/decks/rider/mid_size/9.jpg",
+      "Wheel Of Fortune": "https://gfx.tarot.com/images/site/decks/rider/mid_size/10.jpg",
+      "Justice": "https://gfx.tarot.com/images/site/decks/rider/mid_size/11.jpg",
+      "The Hanged Man": "https://gfx.tarot.com/images/site/decks/rider/mid_size/12.jpg",
+      "Death": "https://gfx.tarot.com/images/site/decks/rider/mid_size/13.jpg",
+      "Temperance": "https://gfx.tarot.com/images/site/decks/rider/mid_size/14.jpg",
+      "The Devil": "https://gfx.tarot.com/images/site/decks/rider/mid_size/15.jpg",
+      "The Tower": "https://gfx.tarot.com/images/site/decks/rider/mid_size/16.jpg",
+      "The Star": "https://gfx.tarot.com/images/site/decks/rider/mid_size/17.jpg",
+      "The Moon": "https://gfx.tarot.com/images/site/decks/rider/mid_size/18.jpg",
+      "The Sun": "https://gfx.tarot.com/images/site/decks/rider/mid_size/19.jpg",
+      "The Last Judgment": "https://gfx.tarot.com/images/site/decks/rider/mid_size/20.jpg",
+      "The World": "https://gfx.tarot.com/images/site/decks/rider/mid_size/21.jpg", 
+      "Fortitude": "https://gfx.tarot.com/images/site/decks/rider/mid_size/8.jpg",
       "Page of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/32.jpg",
       "Knight of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/33.jpg",
       "Queen of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/34.jpg",
@@ -142,29 +166,76 @@
       "Page of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/60.jpg",
       "Knight of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/61.jpg",
       "Queen of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/62.jpg",
-      "King of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/63.jpg"
+      "King of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/63.jpg",
+      "Ace of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/22.jpg",
+      "Two of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/23.jpg",
+      "Three of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/24.jpg",
+      "Four of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/25.jpg",
+      "Five of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/26.jpg",
+      "Six of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/27.jpg",
+      "Seven of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/28.jpg", 
+      "Eight of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/29.jpg", 
+      "Nine of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/30.jpg",
+      "Ten of Wands": "https://gfx.tarot.com/images/site/decks/rider/mid_size/31.jpg",
+      "Ace of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/36.jpg",
+      "Two of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/37.jpg",  
+      "Three of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/38.jpg", 
+      "Four of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/39.jpg", 
+      "Five of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/40.jpg", 
+      "Six of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/41.jpg", 
+      "Seven of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/42.jpg", 
+      "Eight of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/43.jpg", 
+      "Nine of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/44.jpg", 
+      "Ten of Cups": "https://gfx.tarot.com/images/site/decks/rider/mid_size/45.jpg", 
+      "Ace of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/64.jpg", 
+      "Two of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/65.jpg",
+      "Three of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/66.jpg",
+      "Four of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/67.jpg",
+      "Five of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/68.jpg",
+      "Six of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/69.jpg",
+      "Seven of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/70.jpg",
+      "Eight of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/71.jpg",
+      "Nine of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/72.jpg",
+      "Ten of Pentacles": "https://gfx.tarot.com/images/site/decks/rider/mid_size/73.jpg",
+      "Ace of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/50.jpg",
+      "Two of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/51.jpg",
+      "Three of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/52.jpg",
+      "Four of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/53.jpg",
+      "Five of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/54.jpg",
+      "Six of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/55.jpg",
+      "Seven of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/56.jpg",
+      "Eight of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/57.jpg",
+      "Nine of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/58.jpg",
+      "Ten of Swords": "https://gfx.tarot.com/images/site/decks/rider/mid_size/59.jpg",
+      "The Lovers": "https://gfx.tarot.com/images/site/decks/rider/mid_size/6.jpg"
+
     };
+
+    let allCards = [];
 
     async function fetchTarotCards() {
       try {
-        const response = await fetch('https://tarotapi.dev/api/v1/cards/courts');
+        const response = await fetch('https://tarotapi.dev/api/v1/cards');
         const data = await response.json();
-        displayTarotCards(data.cards);
+        allCards = data.cards;
+        displayTarotCards(allCards);
       } catch (error) {
         document.getElementById('loading').innerHTML = `
-            <div class="alert alert-danger" role="alert">
-              Failed to load Tarot cards. Please try again later.
-            </div>`;
+          <div class="alert alert-danger" role="alert">
+            Failed to load Tarot cards. Please try again later.
+          </div>`;
         console.error("Error fetching Tarot API:", error);
       }
     }
 
     function displayTarotCards(cards) {
+      const majorContainer = document.getElementById('major-container');
       const wandsContainer = document.getElementById('wands-container');
       const cupsContainer = document.getElementById('cups-container');
       const pentaclesContainer = document.getElementById('pentacles-container');
       const swordsContainer = document.getElementById('swords-container');
 
+      majorContainer.innerHTML = '';
       wandsContainer.innerHTML = '';
       cupsContainer.innerHTML = '';
       pentaclesContainer.innerHTML = '';
@@ -174,22 +245,24 @@
       cards.forEach(card => {
         const imageUrl = tarotCardImages[card.name] || "https://via.placeholder.com/200x300?text=No+Image";
         const cardElement = `
-            <div class="col-md-3 mb-4">
-              <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                <div class="card-inner">
-                  <div class="card-front">
-                    <img src="${imageUrl}" class="card-img" alt="${card.name}">
-                  </div>
-                  <div class="card-back">
-                    <h5>${card.name}</h5>
-                    <p>${card.meaning_up}</p>
-                  </div>
+          <div class="col-6 col-sm-4 col-md-3 mb-4">
+            <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="${imageUrl}" class="card-img" alt="${card.name}">
+                </div>
+                <div class="card-back">
+                  <h5>${card.name}</h5>
+                  <p>${card.meaning_up}</p>
                 </div>
               </div>
-            </div>`;
+            </div>
+          </div>`;
+          
 
-        // Assign the card to the correct section based on its suit
-        if (card.name.includes("Wands")) {
+        if (card.type === "major") {
+          majorContainer.innerHTML += cardElement;
+        } else if (card.name.includes("Wands")) {
           wandsContainer.innerHTML += cardElement;
         } else if (card.name.includes("Cups")) {
           cupsContainer.innerHTML += cardElement;
@@ -206,6 +279,7 @@
       const filteredCards = allCards.filter(card => card.name.toLowerCase().includes(query));
       displayTarotCards(filteredCards);
     }
+
     fetchTarotCards();
   </script>
 </body>
