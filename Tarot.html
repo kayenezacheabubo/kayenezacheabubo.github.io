@@ -144,7 +144,6 @@
       padding: 10px;
       text-align: justify;
       font-size: 0.9rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     .card-back h5 {
@@ -166,8 +165,8 @@
     <div class="wave"></div>
     <div class="wave"></div>
     <div class="wave"></div>
- </div>
- 
+  </div>
+
   <div class="container">
     <h1 class="text-center mt-4">Rider Waite Deck</h1>
     <div id="loading" class="text-center mt-4">
@@ -182,39 +181,19 @@
         autocomplete="off">
     </div>
 
-    <!-- Major Arcana Section -->
-    <div id="major-section" class="card-section">
-      <h2 class="text-center">Major Arcana</h2>
-      <div class="row card-container" id="major-container"></div>
-    </div>
-
-    <!-- Wands Section -->
-    <div id="wands-section" class="card-section">
-      <h2 class="text-center mt-4">Wands</h2>
-      <div class="row card-container" id="wands-container"></div>
-    </div>
-
-    <!-- Cups Section -->
-    <div id="cups-section" class="card-section">
-      <h2 class="text-center mt-4">Cups</h2>
-      <div class="row card-container" id="cups-container"></div>
-    </div>
-
-    <!-- Pentacles Section -->
-    <div id="pentacles-section" class="card-section">
-      <h2 class="text-center mt-4">Pentacles</h2>
-      <div class="row card-container" id="pentacles-container"></div>
-    </div>
-
-    <!-- Swords Section -->
-    <div id="swords-section" class="card-section">
-      <h2 class="text-center mt-4">Swords</h2>
-      <div class="row card-container" id="swords-container"></div>
-    </div>
+    <div id="cards-container"></div>
+    <p id="no-results" class="text-center mt-4" style="display: none;">No cards found. Try a different search!</p>
   </div>
 
   <script>
     let allCards = [];
+    const sections = {
+      "major": "Major Arcana",
+      "wands": "Wands",
+      "cups": "Cups",
+      "pentacles": "Pentacles",
+      "swords": "Swords"
+    };
 
     async function fetchTarotCards() {
       try {
@@ -232,43 +211,33 @@
     }
 
     function displayTarotCards(cards) {
-      const majorContainer = document.getElementById('major-container');
-      const wandsContainer = document.getElementById('wands-container');
-      const cupsContainer = document.getElementById('cups-container');
-      const pentaclesContainer = document.getElementById('pentacles-container');
-      const swordsContainer = document.getElementById('swords-container');
-
-      majorContainer.innerHTML = '';
-      wandsContainer.innerHTML = '';
-      cupsContainer.innerHTML = '';
-      pentaclesContainer.innerHTML = '';
-      swordsContainer.innerHTML = '';
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
       document.getElementById('loading').style.display = 'none';
+      document.getElementById('no-results').style.display = cards.length ? 'none' : 'block';
 
-      cards.forEach(card => {
-        const cardElement = `
-          <div class="col-6 col-sm-4 col-md-3 mb-4">
-            <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-              <div class="card-inner">
-                <div class="card-front">${card.name}</div>
-                <div class="card-back">
-                  <h5>${card.name}</h5>
-                  <p>${card.meaning_up}</p>
+      Object.entries(sections).forEach(([type, title]) => {
+        const filteredCards = cards.filter(card => card.type === type || card.name.toLowerCase().includes(type));
+        if (filteredCards.length > 0) {
+          const section = document.createElement('div');
+          section.innerHTML = `
+            <h2 class="text-center mt-4">${title}</h2>
+            <div class="row card-container"></div>`;
+          filteredCards.forEach(card => {
+            section.querySelector('.row').innerHTML += `
+              <div class="col-6 col-sm-4 col-md-3 mb-4">
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                  <div class="card-inner">
+                    <div class="card-front">${card.name}</div>
+                    <div class="card-back">
+                      <h5>${card.name}</h5>
+                      <p>${card.meaning_up}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>`;
-
-        if (card.type === "major") {
-          majorContainer.innerHTML += cardElement;
-        } else if (card.name.includes("Wands")) {
-          wandsContainer.innerHTML += cardElement;
-        } else if (card.name.includes("Cups")) {
-          cupsContainer.innerHTML += cardElement;
-        } else if (card.name.includes("Pentacles")) {
-          pentaclesContainer.innerHTML += cardElement;
-        } else if (card.name.includes("Swords")) {
-          swordsContainer.innerHTML += cardElement;
+              </div>`;
+          });
+          container.appendChild(section);
         }
       });
     }
